@@ -13,28 +13,26 @@ struct RegistrationView: View
     @Environment(\.colorScheme) var colorScheme;
     
     @ObservedObject var db: DataBase;
-    @ObservedObject var keyboard: Keyboard;
-    
-    @State private var enterUserInfo: UserInfo = UserInfo();
-    @State private var enterRepeatPassword: String = "";
     
     @State private var iconStatus: Bool?;
-    
     @State private var isNameEmpty: Bool?;
     @State private var isLoginEmpty: Bool?;
     @State private var isPasswordEmpty: Bool?;
     @State private var isRepeatPasswordEmpty: Bool?;
+    @State private var keyboard: Keyboard = Keyboard();
+    @State private var enterRepeatPassword: String = "";
+    @State private var enterUserInfo: UserInfo = UserInfo();
     
     private func registrate()
     {
         if ( self.enterUserInfo.password == self.enterRepeatPassword )
         {
             self.db.insert(
-                table: "user",
+                table: TABLE_USER,
                 parameters: [
-                    "name": self.enterUserInfo.name,
-                    "login": self.enterUserInfo.login,
-                    "password": self.enterUserInfo.password
+                    TABLE_USER_NAME: self.enterUserInfo.name,
+                    TABLE_USER_LOGIN: self.enterUserInfo.login,
+                    TABLE_USER_PASSWORD: self.enterUserInfo.password
                 ])
             {
                 withAnimation( .easeInOut( duration: 0.5 ) )
@@ -48,7 +46,7 @@ struct RegistrationView: View
             withAnimation( .easeInOut( duration: 0.5 ) )
             {
                 self.iconStatus = false;
-                self.enterRepeatPassword = EMPTY;
+                self.enterRepeatPassword = EMPTY_STRING;
             }
             
         }
@@ -56,153 +54,97 @@ struct RegistrationView: View
     
     var body: some View
     {
-        GeometryReader
-        { geometry in
-            VStack
+        WrapperView( keyboard: self.keyboard )
+        {
+            Text( "registration-title" )
+                .font( Font.system( size: 35, design: .rounded ) )
+                .fontWeight( .heavy )
+                .textCase( .uppercase )
+            if ( self.keyboard.keyboardIsHidden )
             {
-                VStack
-                {
-                    Text( REGISTRATION_TITLE )
-                        .font( Font.system( size: 35, design: .rounded ) )
-                        .fontWeight( .heavy )
-                        .textCase( .uppercase )
-                    if ( self.keyboard.keyboardIsHidden )
-                    {
-                        if ( iconStatus == nil )
-                        {
-                            Image( systemName: USER_ADD_LOGO )
-                                .resizable()
-                                .scaledToFit()
-                        }
-                        else if ( iconStatus! )
-                        {
-                            Image( systemName: USER_OK_LOGO )
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(.green)
-                        }
-                        else
-                        {
-                            Image( systemName: USER_ERROR_LOGO )
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(.red)
-                        }
-                    }
-                    
-                    Spacer();
-                    TextField( EMPTY, text: self.$enterUserInfo.name )
-                        .placeholder(
-                            when: self.enterUserInfo.name.isEmpty || nil != isNameEmpty && isNameEmpty!,
-                            self.colorScheme,
-                            placeholder:
-                            {
-                                Text( REGISTRATION_FILED_NAME.capitalizingFirstLetter() )
-                            }
-                        )
-                        .padding( 10 )
-                    TextField( EMPTY, text: self.$enterUserInfo.login )
-                        .placeholder(
-                            when: self.enterUserInfo.login.isEmpty || nil != isLoginEmpty && isLoginEmpty!,
-                            self.colorScheme,
-                            placeholder:
-                            {
-                                Text( REGISTRATION_FILED_LOGIN.capitalizingFirstLetter() )
-                                    .foregroundColor( nil == isLoginEmpty || isLoginEmpty! ? .red : dark( self.colorScheme ) )
-                            }
-                        )
-                        .padding( 10 )
-                        .disabled( isLoginEmpty ?? true )
-                    
-                    SecureField( EMPTY, text: self.$enterUserInfo.password )
-                        .placeholder(
-                            when: self.enterUserInfo.password.isEmpty || nil != isPasswordEmpty && isPasswordEmpty!,
-                            self.colorScheme,
-                            placeholder:
-                            {
-                                Text( LOGIN_FILED_PASSWORD.capitalizingFirstLetter() )
-                                    .foregroundColor( nil == isPasswordEmpty || isPasswordEmpty! ? .red : dark( self.colorScheme ) )
-                            }
-                        )
-                        .padding( 10 )
-                        .disabled( isPasswordEmpty ?? true )
-                    SecureField( EMPTY, text: self.$enterRepeatPassword )
-                        .placeholder(
-                            when: self.enterRepeatPassword.isEmpty,
-                            self.colorScheme,
-                            placeholder:
-                            {
-                                Text( REGISTRATION_FILED_PASSWORD_REPEAT.capitalizingFirstLetter() )
-                                    .foregroundColor( nil == isRepeatPasswordEmpty || isRepeatPasswordEmpty! ? .red : dark( self.colorScheme ) )
-                            }
-                        )
-                        .padding( 10 )
-                        .disabled( isRepeatPasswordEmpty ?? true )
-                    
-                    Spacer();
-                    Button(
-                        action:
-                        {
-                            self.registrate();
-                            UIApplication.shared.endEditing();
-                            
-                        }
-                    )
-                    {
-                        Text( REGISTRATION_BUTTON_CONFIRM )
-                            .frame( maxWidth: .infinity, minHeight: 50 )
-                            .background( dark( self.colorScheme ) )
-                            .foregroundColor( light( self.colorScheme ) )
-                            .border( dark( self.colorScheme ), width: 5.0 )
-                            .cornerRadius( 5 )
-                            .textCase( .uppercase )
-                            .font( Font.system( size: 20, weight: .bold ) )
-                    }
-                    Button( action: { self.presentationMode.wrappedValue.dismiss() } )
-                    {
-                        Text( REGISTRATION_BUTTON_CANCEL )
-                            .frame( maxWidth: .infinity, minHeight: 50 )
-                            .background( light( self.colorScheme ) )
-                            .foregroundColor( dark( self.colorScheme ) )
-                            .border( dark( self.colorScheme ), width: 5.0 )
-                            .cornerRadius( 5 )
-                            .textCase( .uppercase )
-                            .font( Font.system(size: 20, weight: .bold ) )
-                    }
-                }
-                .frame( width: geometry.size.width / 1.3, alignment: .center )
-                .navigationBarHidden( true )
-                .onChange( of: self.enterUserInfo.name )
-                { newValue in
-                    isLoginEmpty = newValue.isEmpty;
-                    if ( isLoginEmpty! )
-                    {
-                        self.enterUserInfo.login = EMPTY;
-                    }
-                }
-                .onChange( of: self.enterUserInfo.login )
-                { newValue in
-                    isPasswordEmpty = newValue.isEmpty;
-                    if ( isPasswordEmpty! )
-                    {
-                        self.enterUserInfo.password = EMPTY;
-                        self.enterRepeatPassword = EMPTY;
-                    }
-                }
-                .onChange( of: self.enterUserInfo.password )
-                { newValue in
-                    isRepeatPasswordEmpty = newValue.isEmpty;
-                    if ( isRepeatPasswordEmpty! )
-                    {
-                        self.enterUserInfo.password = EMPTY;
-                        self.enterRepeatPassword = EMPTY;
-                    }
-                }
+                StatusImgView( image: USER_LOGO_ADD, status: self.iconStatus )
             }
-            .frame( width: geometry.size.width, height: geometry.size.height, alignment: .center )
+            
+            Spacer();
+            TextField( EMPTY_STRING, text: self.$enterUserInfo.name )
+                .placeholder(
+                    when: self.enterUserInfo.name.isEmpty || nil != isNameEmpty && isNameEmpty!,
+                    self.colorScheme,
+                    placeholder:
+                    {
+                        Text( "registration-field-name" )
+                    }
+                )
+                .padding( 10 )
+            TextField( EMPTY_STRING, text: self.$enterUserInfo.login )
+                .placeholder(
+                    when: self.enterUserInfo.login.isEmpty || nil != isLoginEmpty && isLoginEmpty!,
+                    self.colorScheme,
+                    placeholder:
+                    {
+                        Text( "registration-field-login" )
+                            .foregroundColor( nil == isLoginEmpty || isLoginEmpty! ? .red : dark( self.colorScheme ) )
+                    }
+                )
+                .padding( 10 )
+                .disabled( isLoginEmpty ?? true )
+            
+            SecureField( EMPTY_STRING, text: self.$enterUserInfo.password )
+                .placeholder(
+                    when: self.enterUserInfo.password.isEmpty || nil != isPasswordEmpty && isPasswordEmpty!,
+                    self.colorScheme,
+                    placeholder:
+                    {
+                        Text( "registration-field-password" )
+                            .foregroundColor( nil == isPasswordEmpty || isPasswordEmpty! ? .red : dark( self.colorScheme ) )
+                    }
+                )
+                .padding( 10 )
+                .disabled( isPasswordEmpty ?? true )
+            SecureField( EMPTY_STRING, text: self.$enterRepeatPassword )
+                .placeholder(
+                    when: self.enterRepeatPassword.isEmpty,
+                    self.colorScheme,
+                    placeholder:
+                    {
+                        Text( "registration-field-repeat-password" )
+                            .foregroundColor( nil == isRepeatPasswordEmpty || isRepeatPasswordEmpty! ? .red : dark( self.colorScheme ) )
+                    }
+                )
+                .padding( 10 )
+                .disabled( isRepeatPasswordEmpty ?? true )
+            
+            Spacer();
+            Button(
+                action:
+                {
+                    self.registrate();
+                    UIApplication.shared.endEditing();
+                    
+                }
+            )
+            {
+                Text( "registration-button-confirm" )
+                    .frame( maxWidth: .infinity, minHeight: 50 )
+                    .background( dark( self.colorScheme ) )
+                    .foregroundColor( light( self.colorScheme ) )
+                    .border( dark( self.colorScheme ), width: 5.0 )
+                    .cornerRadius( 5 )
+                    .textCase( .uppercase )
+                    .font( Font.system( size: 20, weight: .bold ) )
+            }
+            Button( action: { self.presentationMode.wrappedValue.dismiss(); } )
+            {
+                Text( "registration-button-cancel" )
+                    .frame( maxWidth: .infinity, minHeight: 50 )
+                    .background( light( self.colorScheme ) )
+                    .foregroundColor( dark( self.colorScheme ) )
+                    .border( dark( self.colorScheme ), width: 5.0 )
+                    .cornerRadius( 5 )
+                    .textCase( .uppercase )
+                    .font( Font.system(size: 20, weight: .bold ) )
+            }
         }
-        .font( Font.system( size: 20, design: .rounded ) )
-        .foregroundColor( dark( self.colorScheme ) )
     }
 }
 
@@ -213,6 +155,9 @@ struct RegistrationView_Previews: PreviewProvider
     
     static var previews: some View
     {
-        RegistrationView( db: db, keyboard: keyboard );
+        RegistrationView( db: db )
+            .environment( \.locale, .init(identifier: "en" ) )
+        RegistrationView( db: db )
+            .environment( \.locale, .init(identifier: "ru" ) )
     }
 }

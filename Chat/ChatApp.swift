@@ -11,7 +11,6 @@ import SwiftUI
 struct ChatApp: App
 {
     @ObservedObject private var db: DataBase = DataBase();
-    @ObservedObject private var keyboard = Keyboard();
     @ObservedObject private var status: Status = Status();
     
     var body: some Scene
@@ -20,7 +19,7 @@ struct ChatApp: App
         {
             if ( !self.status.isLogin )
             {
-                LoginView( db: self.db, keyboard: self.keyboard, status: self.status );
+                LoginView( db: self.db, status: self.status );
             }
             else
             {

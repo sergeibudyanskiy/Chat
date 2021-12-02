@@ -23,6 +23,9 @@
 		14B801A82750F4A000C53355 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B801A72750F4A000C53355 /* Status.swift */; };
 		14B801AA2750FB3D00C53355 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B801A92750FB3D00C53355 /* MainView.swift */; };
 		14B801AC2750FE7D00C53355 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B801AB2750FE7D00C53355 /* ProfileView.swift */; };
+		14D969122758EBE5008049B2 /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D969112758EBE5008049B2 /* WrapperView.swift */; };
+		14D969142759112C008049B2 /* StatusImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D969132759112C008049B2 /* StatusImgView.swift */; };
+		14D9692A27592675008049B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14D9692C27592675008049B2 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,14 +60,20 @@
 		14B6CFF4273C1C7200B13C18 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		14B6CFFC273E8EE500B13C18 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14B6CFFF273E9D5100B13C18 /* Chat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chat-Bridging-Header.h"; sourceTree = "<group>"; };
-		14B6D001273E9D5100B13C18 /* Constant.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Constant.hpp; sourceTree = "<group>"; };
 		14B6D003273EA45A00B13C18 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		14B6D0052742B35000B13C18 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		14B801A52750F31900C53355 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		14B801A72750F4A000C53355 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		14B801A92750FB3D00C53355 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		14B801AB2750FE7D00C53355 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		14D9690F2758E9BF008049B2 /* Base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		14D969112758EBE5008049B2 /* WrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperView.swift; sourceTree = "<group>"; };
+		14D969132759112C008049B2 /* StatusImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusImgView.swift; sourceTree = "<group>"; };
+		14D9691727591A83008049B2 /* Content.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
+		14D9691927591C44008049B2 /* Logo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logo.h; sourceTree = "<group>"; };
+		14D9691A27591C8C008049B2 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		14D9692B27592675008049B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14D9692E275926F2008049B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14D9692F27592F1C008049B2 /* DataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +131,7 @@
 				14338893273BDE9600A3C114 /* ChatApp.swift */,
 				14338897273BDE9800A3C114 /* Assets.xcassets */,
 				14338899273BDE9800A3C114 /* Preview Content */,
+				14D9692C27592675008049B2 /* Localizable.strings */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -163,6 +173,7 @@
 		14B6CFF8273E8CEF00B13C18 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				14D969102758EBC1008049B2 /* Common */,
 				14338895273BDE9600A3C114 /* LoginView.swift */,
 				14B6D003273EA45A00B13C18 /* RegistrationView.swift */,
 				14B801A92750FB3D00C53355 /* MainView.swift */,
@@ -185,11 +196,22 @@
 		14D9690E2758E93B008049B2 /* Include */ = {
 			isa = PBXGroup;
 			children = (
-				14B6D001273E9D5100B13C18 /* Constant.hpp */,
 				14B6CFFF273E9D5100B13C18 /* Chat-Bridging-Header.h */,
-				14D9690F2758E9BF008049B2 /* Base.h */,
+				14D9691A27591C8C008049B2 /* Header.h */,
+				14D9691727591A83008049B2 /* Content.h */,
+				14D9691927591C44008049B2 /* Logo.h */,
+				14D9692F27592F1C008049B2 /* DataBase.h */,
 			);
 			path = Include;
+			sourceTree = "<group>";
+		};
+		14D969102758EBC1008049B2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				14D969112758EBE5008049B2 /* WrapperView.swift */,
+				14D969132759112C008049B2 /* StatusImgView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +301,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 14338887273BDE9600A3C114;
 			productRefGroup = 14338891273BDE9600A3C114 /* Products */;
@@ -298,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1433889B273BDE9800A3C114 /* Preview Assets.xcassets in Resources */,
+				14D9692A27592675008049B2 /* Localizable.strings in Resources */,
 				14338898273BDE9800A3C114 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,8 +352,10 @@
 				14B6CFFD273E8EE500B13C18 /* User.swift in Sources */,
 				14B801AA2750FB3D00C53355 /* MainView.swift in Sources */,
 				14B6D0062742B35000B13C18 /* Keyboard.swift in Sources */,
+				14D969122758EBE5008049B2 /* WrapperView.swift in Sources */,
 				14B6CFF5273C1C7300B13C18 /* Theme.swift in Sources */,
 				14B801A82750F4A000C53355 /* Status.swift in Sources */,
+				14D969142759112C008049B2 /* StatusImgView.swift in Sources */,
 				14B6D004273EA45A00B13C18 /* RegistrationView.swift in Sources */,
 				143388BF273BDEB400A3C114 /* DataBase.swift in Sources */,
 				14B801AC2750FE7D00C53355 /* ProfileView.swift in Sources */,
@@ -369,11 +395,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		14D9692C27592675008049B2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14D9692B27592675008049B2 /* en */,
+				14D9692E275926F2008049B2 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		143388B2273BDE9800A3C114 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -435,6 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -511,7 +551,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = SB.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Chat/Chat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Chat/Include/Chat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -543,7 +583,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = SB.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Chat/Chat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Chat/Include/Chat-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

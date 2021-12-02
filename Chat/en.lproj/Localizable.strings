@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Chat
+
+  Created by Sergei Budyanskiy on 02.12.2021.
+  
+*/
+
+//  LoginView
+"login-title"               = "LOGIN";
+"login-field-login"         = "Login";
+"login-field-password"      = "Password";
+"login-button-confirm"      = "CONFIRM";
+"login-button-registrate"   = "REGISTRATE";
+
+//  RegistrationView
+"registration-title"                    = "REGISTRATION";
+"registration-field-name"               = "Enter name";
+"registration-field-login"              = "Enter login";
+"registration-field-password"           = "Enter password";
+"registration-field-repeat-password"    = "Repeat password";
+"registration-button-confirm"           = "REGISTRATE";
+"registration-button-cancel"            = "CANCEL";

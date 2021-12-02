@@ -25,7 +25,7 @@ struct MainView: View
                     {
                         HStack
                         {
-                            Text( TITLE )
+                            Text( "chat" )
                                 .font( Font.system( size: 70, design: .rounded ) )
                                 .fontWeight( .heavy )
                                 .textCase( .uppercase )
