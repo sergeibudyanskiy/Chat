@@ -8,10 +8,24 @@
 import SwiftUI
 
 @main
-struct ChatApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+struct ChatApp: App
+{
+    @ObservedObject private var db: DataBase = DataBase();
+    @ObservedObject private var keyboard = Keyboard();
+    @ObservedObject private var status: Status = Status();
+    
+    var body: some Scene
+    {
+        WindowGroup
+        {
+            if ( !self.status.isLogin )
+            {
+                LoginView( db: self.db, keyboard: self.keyboard, status: self.status );
+            }
+            else
+            {
+                MainView( status: self.status );
+            }
         }
     }
 }
